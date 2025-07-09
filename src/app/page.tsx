@@ -82,7 +82,7 @@ export default function HomePage() {
                 />
                 <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors flex items-center justify-center space-x-2">
                   <span>Search Jobs</span>
-                  <ArrowRight className="w-5 h-5" />
+               
                 </button>
               </div>
             </div>

@@ -223,7 +223,7 @@ export default function HomePage() {
             Ready to Take the Next Step?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Whether you're seeking your dream job or looking to hire top talent, we're here to help.
+            Whether you&apos;re seeking your dream job or looking to hire top talent, we&apos;re here to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 hover:bg-gray-50 px-8 py-4 rounded-lg font-semibold transition-colors">

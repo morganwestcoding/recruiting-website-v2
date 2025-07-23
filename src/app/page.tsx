@@ -1,21 +1,52 @@
+"use client"
+
 import Link from 'next/link'
 import { ArrowRight, Building2, Users, Briefcase, Star, ChevronRight } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 export default function HomePage() {
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+
+  useEffect(() => {
+    let ticking = false
+
+    const controlNavbar = () => {
+      const currentScrollY = window.scrollY
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down & past 100px
+        setIsVisible(false)
+      } else {
+        // Scrolling up
+        setIsVisible(true)
+      }
+      
+      setLastScrollY(currentScrollY)
+      ticking = false
+    }
+
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(controlNavbar)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', requestTick)
+    return () => window.removeEventListener('scroll', requestTick)
+  }, [lastScrollY])
   return (
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
-      <header className="border-b border-gray-100 sticky top-0 z-50 bg-transparent">
+      <header className={`border-b border-gray-100 sticky top-0 z-50 bg-white/80 backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-gray-900">SagePaths</span>
-              </div>
+<img src="/Logo-White.png" alt="SagePaths" className="h-14 w-auto" />
             </div>
 
             {/* Navigation */}
@@ -38,22 +69,21 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-[#F3F9FA] py-20 lg:py-32">
+      <section className="bg-[#f8f6f4] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div>
 <div className="mb-4">
-  <span className="text-[#E07A5F] font-light text-base">Where Talent Meets Precision</span>
+  <span className="text-[#a67f6a] font-light text-base">Where Talent Meets Precision</span>
 </div>
 
-<h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-Connect Talent<br/>with
-Opportunity
+<h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+No upfront fees.<br/>No guesswork.<br/>Just great hires.
 </h1>
 
 <p className="text-lg text-gray-700 mb-10 leading-relaxed max-w-xl">
-The premier platform for professionals seeking their next career move and companies building exceptional teams.
+Let’s build your dream team, one standout candidate at a time!
 </p>
 
               
@@ -64,7 +94,7 @@ The premier platform for professionals seeking their next career move and compan
       placeholder="Search roles, skills, or companies"
       className="w-full pl-5 pr-32 py-4 bg-transparent text-gray-800 placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
     />
-<button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#E07A5F] hover:bg-[#D16B4F] text-white font-semibold px-5 py-2 rounded-lg transition">
+<button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#a67f6a] hover:bg-[#947a6c] text-white font-semibold px-5 py-2 rounded-lg transition">
   Search
 </button>
   </div>
@@ -73,7 +103,7 @@ The premier platform for professionals seeking their next career move and compan
             </div>
 
             {/* Right Content - Dual Overlapping Videos */}
-            <div className="relative w-full max-w-xl mx-auto h-80">
+            <div className="relative w-full max-w-xl mx-auto -mt-20 h-80">
               {/* Background elements */}
               <div className="absolute -top-6 left-8 w-32 h-32 bg-[#7db9b6] rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
               <div className="absolute top-32 -right-8 w-28 h-28 bg-[#4bb79f] rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
@@ -106,7 +136,7 @@ The premier platform for professionals seeking their next career move and compan
       </section>
 
       {/* Companies Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-[#f8f6f4]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -219,10 +249,7 @@ The premier platform for professionals seeking their next career move and compan
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg flex items-center justify-center">
-                  <Building2 className="w-5 h-5 text-white" />
-                </div>
-                <span className="text-xl font-bold">SagePaths</span>
+                <img src="/Logo-White.png" alt="SagePaths" className="h-8 w-auto" />
               </div>
               <p className="text-gray-400">
                 Transforming technical hiring through innovative assessment and interview solutions.

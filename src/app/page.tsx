@@ -5,7 +5,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
-      <header className="border-b border-gray-100 bg-white/95 backdrop-blur-sm sticky top-0 z-50">
+      <header className="border-b border-gray-100 sticky top-0 z-50 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -20,175 +20,87 @@ export default function HomePage() {
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/jobs" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                Jobs
-              </Link>
-              <Link href="/companies" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                Companies
-              </Link>
               <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                About
+                About Me
+              </Link>
+              <Link href="/services" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+                Our Services
               </Link>
               <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
-                Contact
+                Contact Me
               </Link>
             </nav>
+
+            {/* CTA Buttons */}
+  
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-gray-50 via-white to-blue-50">
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="/hero-video.mp4" type="video/mp4" />
-          </video>
-          {/* Video Overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/30"></div>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-              Connect Talent with
-              <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent block drop-shadow-lg">
-                Opportunity
-              </span>
-            </h1>
-            <p className="text-xl text-gray-100 mb-8 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-              The premier platform for professionals seeking their next career move and companies building exceptional teams.
-            </p>
-            
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-12">
-              <div className="flex flex-col sm:flex-row gap-4 p-2 bg-white rounded-2xl shadow-lg border border-gray-100">
-                <input
-                  type="text"
-                  placeholder="Job title, keywords, or company"
-                  className="flex-1 px-6 py-4 text-gray-900 placeholder-gray-500 bg-transparent outline-none text-lg"
-                />
-                <input
-                  type="text"
-                  placeholder="Location"
-                  className="sm:w-48 px-6 py-4 text-gray-900 placeholder-gray-500 bg-transparent outline-none text-lg border-t sm:border-t-0 sm:border-l border-gray-100"
-                />
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-colors flex items-center justify-center space-x-2">
-                  <span>Search Jobs</span>
-               
-                </button>
-              </div>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="flex flex-wrap justify-center items-center gap-8 text-gray-100">
-              <div className="flex items-center space-x-2">
-                <Briefcase className="w-5 h-5 text-blue-400" />
-                <span className="font-medium">500+ Active Jobs</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Building2 className="w-5 h-5 text-blue-400" />
-                <span className="font-medium">200+ Companies</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Users className="w-5 h-5 text-blue-400" />
-                <span className="font-medium">10k+ Professionals</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Jobs Section */}
-      <section className="py-20 bg-white">
+      <section className="bg-[#F3F9FA] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Featured Opportunities
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Discover hand-picked positions from top companies actively hiring now
-            </p>
-          </div>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div>
+<div className="mb-4">
+  <span className="text-[#E07A5F] font-light text-base">Where Talent Meets Precision</span>
+</div>
 
-          {/* Job Cards Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {[
-              {
-                title: "Senior Product Manager",
-                company: "TechCorp",
-                location: "San Francisco, CA",
-                type: "Full-time",
-                salary: "$140k - $180k",
-                tags: ["Remote OK", "Equity", "Health"],
-                featured: true
-              },
-              {
-                title: "Frontend Developer",
-                company: "StartupXYZ",
-                location: "New York, NY",
-                type: "Full-time",
-                salary: "$110k - $150k",
-                tags: ["React", "TypeScript", "Remote"],
-                featured: false
-              },
-              {
-                title: "Data Scientist",
-                company: "DataFlow Inc",
-                location: "Austin, TX",
-                type: "Full-time",
-                salary: "$120k - $160k",
-                tags: ["Python", "ML", "Remote OK"],
-                featured: true
-              }
-            ].map((job, index) => (
-              <div key={index} className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-blue-200 transition-all duration-200 cursor-pointer">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-xl flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-blue-600" />
-                  </div>
-                  {job.featured && (
-                    <span className="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-1 rounded-full flex items-center">
-                      <Star className="w-3 h-3 mr-1" />
-                      Featured
-                    </span>
-                  )}
+<h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+Connect Talent<br/>with
+Opportunity
+</h1>
+
+<p className="text-lg text-gray-700 mb-10 leading-relaxed max-w-xl">
+The premier platform for professionals seeking their next career move and companies building exceptional teams.
+</p>
+
+              
+<div className="w-full max-w-md">
+  <div className="relative rounded-xl bg-white/80 backdrop-blur-md shadow-md border border-white/50">
+    <input
+      type="text"
+      placeholder="Search roles, skills, or companies"
+      className="w-full pl-5 pr-32 py-4 bg-transparent text-gray-800 placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
+    />
+<button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#E07A5F] hover:bg-[#D16B4F] text-white font-semibold px-5 py-2 rounded-lg transition">
+  Search
+</button>
+  </div>
+</div>
+
+            </div>
+
+            {/* Right Content - Dual Overlapping Videos */}
+            <div className="relative w-full max-w-xl mx-auto h-80">
+              {/* Background elements */}
+              <div className="absolute -top-6 left-8 w-32 h-32 bg-[#7db9b6] rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
+              <div className="absolute top-32 -right-8 w-28 h-28 bg-[#4bb79f] rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
+              
+              {/* Back Video Container */}
+              <div className="absolute top-0 left-0 w-8/12 h-64 bg-white/20 backdrop-blur-sm border border-white/30 rounded-3xl p-2 shadow-xl">
+                <div className="rounded-2xl overflow-hidden w-full h-full">
+                  <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                    <source src="/hero-video-2.mp4" type="video/mp4" />
+                  </video>
                 </div>
-                
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                  {job.title}
-                </h3>
-                <p className="text-gray-600 mb-2">{job.company}</p>
-                <p className="text-gray-500 text-sm mb-4">{job.location} • {job.type}</p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {job.tags.map((tag, tagIndex) => (
-                    <span key={tagIndex} className="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <span className="text-lg font-semibold text-gray-900">{job.salary}</span>
-                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                </div>
+                {/* Glass shine effect */}
+                <div className="absolute top-4 left-4 w-20 h-20 bg-white/20 rounded-full filter blur-2xl"></div>
               </div>
-            ))}
-          </div>
 
-          <div className="text-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
-              <span>View All Jobs</span>
-              <ArrowRight className="w-5 h-5" />
-            </button>
+              {/* Front Video Container - Same Size, Overlapping */}
+              <div className="absolute top-40 left-56 w-8/12 h-64 bg-white/25 backdrop-blur-sm border border-white/40 rounded-3xl p-2 shadow-2xl z-10">
+                <div className="rounded-2xl overflow-hidden w-full h-full">
+                  <video autoPlay loop muted playsInline className="w-full h-full object-cover">
+                    <source src="/hero-video-1.mp4" type="video/mp4" />
+                  </video>
+                </div>
+                {/* Glass shine effect */}
+                <div className="absolute top-4 left-4 w-20 h-20 bg-white/20 rounded-full filter blur-2xl"></div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
@@ -198,10 +110,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Trusted by Leading Companies
+              Trusted by Leading Tech Companies
             </h2>
             <p className="text-xl text-gray-600">
-              Join industry leaders who choose SagePaths for their hiring needs
+              Join industry leaders who choose SagePaths for their technical hiring needs
             </p>
           </div>
 
@@ -216,20 +128,87 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured Solutions Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Complete Technical Hiring Solution
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              From initial screening to final evaluation, streamline your entire technical hiring process
+            </p>
+          </div>
+
+          {/* Solutions Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              {
+                title: "Live Coding Interviews",
+                description: "Conduct real-time technical interviews with our advanced platform",
+                features: ["Real-time collaboration", "50+ programming languages", "Instant feedback"],
+                color: "blue"
+              },
+              {
+                title: "Skills Assessment",
+                description: "Comprehensive evaluation of technical competencies and problem-solving",
+                features: ["Custom test creation", "Automated scoring", "Detailed analytics"],
+                color: "green"
+              },
+              {
+                title: "Candidate Pipeline",
+                description: "Manage and track candidates through your entire hiring process",
+                features: ["Pipeline management", "Team collaboration", "Integration ready"],
+                color: "purple"
+              }
+            ].map((solution, index) => (
+              <div key={index} className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-blue-200 transition-all duration-200">
+                <div className={`w-12 h-12 bg-${solution.color}-100 rounded-xl flex items-center justify-center mb-4`}>
+                  <Building2 className={`w-6 h-6 text-${solution.color}-600`} />
+                </div>
+                
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {solution.title}
+                </h3>
+                <p className="text-gray-600 mb-4">{solution.description}</p>
+                
+                <ul className="space-y-2">
+                  {solution.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="text-sm text-gray-500 flex items-center">
+                      <ChevronRight className="w-4 h-4 mr-2 text-gray-400" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+              <span>Explore All Features</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-            Ready to Take the Next Step?
+            Ready to Transform Your Technical Hiring?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Whether you&apos;re seeking your dream job or looking to hire top talent, we&apos;re here to help.
+            Join hundreds of companies who have improved their hiring quality and efficiency with SagePaths.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-blue-600 hover:bg-gray-50 px-8 py-4 rounded-lg font-semibold transition-colors">
-              Browse Jobs
+              Request Demo
             </button>
-
+            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-colors">
+              Schedule Consultation
+            </button>
           </div>
         </div>
       </section>
@@ -246,33 +225,33 @@ export default function HomePage() {
                 <span className="text-xl font-bold">SagePaths</span>
               </div>
               <p className="text-gray-400">
-                Connecting talent with opportunity through innovative recruiting solutions.
+                Transforming technical hiring through innovative assessment and interview solutions.
               </p>
             </div>
             
             <div>
-              <h3 className="font-semibold mb-4">For Job Seekers</h3>
+              <h3 className="font-semibold mb-4">Solutions</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Browse Jobs</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Career Advice</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Resume Builder</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Live Interviews</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Skills Assessment</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Candidate Pipeline</a></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="font-semibold mb-4">For Employers</h3>
+              <h3 className="font-semibold mb-4">Resources</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">Post Jobs</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Find Candidates</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Documentation</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Best Practices</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Case Studies</a></li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">About Me</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact Me</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">Privacy</a></li>
               </ul>
             </div>

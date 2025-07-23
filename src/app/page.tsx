@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Building2, Users, Briefcase, Star, ChevronRight } from 'lucide-react'
+import { ArrowRight, Building2, ChevronRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export default function HomePage() {

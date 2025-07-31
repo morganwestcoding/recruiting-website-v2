@@ -39,25 +39,25 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
-      <header className={`border-b border-gray-100 sticky top-0 z-50 bg-white/80 backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
+      <header className={`border-b sticky top-0 z-50 bg-[#00685E]/80 backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-<img src="/Logo-White.png" alt="SagePaths" className="h-14 w-auto" />
+<img src="/logo_white.png" alt="SagePaths" className="h-14 w-auto" />
             </div>
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+              <Link href="/about" className="text-white hover:text-gray-900 transition-colors font-medium">
                 About Me
               </Link>
-              <Link href="/services" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+              <Link href="/services" className="text-white hover:text-gray-900 transition-colors font-medium">
                 Our Services
               </Link>
-              <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">
+              <Link href="/contact" className="text-white hover:text-gray-900 transition-colors font-medium">
                 Contact Me
               </Link>
             </nav>
@@ -69,13 +69,13 @@ export default function HomePage() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-[#f8f6f4] py-20 lg:py-32">
+      <section className="bg-[#f8fffe] py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div>
 <div className="mb-4">
-  <span className="text-[#a67f6a] font-light text-base">Where Talent Meets Precision</span>
+  <span className="text-[#00685E] font-light text-base">Where Talent Meets Precision</span>
 </div>
 
 <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
@@ -94,7 +94,7 @@ Let’s build your dream team, one standout candidate at a time!
       placeholder="Search roles, skills, or companies"
       className="w-full pl-5 pr-32 py-4 bg-transparent text-gray-800 placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
     />
-<button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#a67f6a] hover:bg-[#947a6c] text-white font-semibold px-5 py-2 rounded-lg transition">
+<button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#00685E] hover:bg-[#3e6864] text-white font-semibold px-5 py-2 rounded-lg transition">
   Search
 </button>
   </div>
@@ -136,14 +136,14 @@ Let’s build your dream team, one standout candidate at a time!
       </section>
 
       {/* Companies Section */}
-      <section className="py-20 bg-[#f8f6f4]">
+      <section className="py-20 bg-[#f8fffe]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Trusted by Leading Tech Companies
+              Trusted by Leading Companies
             </h2>
             <p className="text-xl text-gray-600">
-              Join industry leaders who choose SagePaths for their technical hiring needs
+              Join industry leaders who choose SagePaths for their hiring needs
             </p>
           </div>
 

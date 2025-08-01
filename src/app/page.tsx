@@ -7,7 +7,9 @@ import { useState, useEffect } from 'react'
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSet, setCurrentSet] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   useEffect(() => {
     let ticking = false
@@ -89,20 +91,34 @@ export default function HomePage() {
     }
   ]
 
-  const reviewsPerSlide = 3
-  const totalSlides = Math.ceil(reviews.length / reviewsPerSlide)
+  // Auto-scroll carousel
+  useEffect(() => {
+    if (!isPaused) {
+      const interval = setInterval(() => {
+        setIsTransitioning(true)
+        
+        setTimeout(() => {
+          setCurrentSet(prev => {
+            const totalSets = Math.ceil(reviews.length / 3)
+            return (prev + 1) % totalSets
+          })
+          
+          // Wait a bit longer before starting fade in
+          setTimeout(() => {
+            setIsTransitioning(false)
+          }, 600) // Delay before fade in starts
+        }, 3000) // Wait for complete staggered fade out
+        
+      }, 8000) // Increased total cycle time to accommodate longer transitions
+      
+      return () => clearInterval(interval)
+    }
+  }, [isPaused, reviews.length])
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides)
-  }
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
-  }
-
-  const getCurrentReviews = () => {
-    const startIndex = currentSlide * reviewsPerSlide
-    return reviews.slice(startIndex, startIndex + reviewsPerSlide)
+  // Get current set of 3 reviews
+  const getCurrentReviewSet = () => {
+    const startIndex = currentSet * 3
+    return reviews.slice(startIndex, startIndex + 3)
   }
 
   return (
@@ -160,7 +176,7 @@ Let's build your dream team, one standout candidate at a time!
   <div className="relative rounded-xl bg-white/80 backdrop-blur-md shadow-md border border-white/50">
     <input
       type="text"
-      placeholder="Search roles, skills, or companies"
+      placeholder="Search roles to find your perfect match"
       className="w-full pl-5 pr-32 py-4 bg-transparent text-gray-800 placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
     />
 <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#00685E] hover:bg-[#3e6864] text-white font-semibold px-5 py-2 rounded-lg transition">
@@ -204,7 +220,7 @@ Let's build your dream team, one standout candidate at a time!
         </div>
       </section>
 
-      {/* Reviews Section */}
+      {/* Reviews Section - Crossfade */}
       <section className="py-20 bg-[#f8fffe]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -216,65 +232,53 @@ Let's build your dream team, one standout candidate at a time!
             </p>
           </div>
 
-          {/* Reviews Carousel */}
-          <div className="relative">
-            {/* Reviews Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-              {getCurrentReviews().map((review, index) => (
-                <div key={`${currentSlide}-${index}`} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+          {/* Crossfade Container */}
+          <div 
+            className="relative min-h-[400px]"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
+            {/* Current Set of Reviews */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {getCurrentReviewSet().map((review, index) => (
+                <div 
+                  key={`${currentSet}-${index}`} 
+                  className={`bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-2000 ease-in-out h-full ${
+                    isTransitioning ? 'opacity-0' : 'opacity-100'
+                  }`}
+                  style={{
+                    transitionDelay: isTransitioning ? `${index * 700}ms` : `${(2 - index) * 700}ms`
+                  }}
+                >
+                  {/* Large Quote Mark */}
+                  <div className="text-6xl text-[#00685E] font-serif leading-none mb-4 opacity-20">"</div>
+                  
                   {/* Review Text */}
-                  <p className="text-gray-700 mb-6 leading-relaxed text-lg">
-                    "{review.review}"
+                  <p className="text-gray-700 mb-8 leading-relaxed text-lg italic">
+                    {review.review}
                   </p>
 
                   {/* Author Info */}
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-12 h-12 ${review.color} rounded-full flex items-center justify-center text-white font-semibold`}>
+                  <div className="flex items-center space-x-4 mt-auto">
+                    <div className={`w-14 h-14 ${review.color} rounded-full flex items-center justify-center text-white font-bold text-lg`}>
                       {review.initials}
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">{review.name}</div>
-                      <div className="text-sm text-gray-600">{review.title}</div>
-                      <div className="text-sm text-gray-500">{review.company}</div>
+                      <div className="font-bold text-gray-900 text-lg">{review.name}</div>
+                      <div className="text-[#00685E] font-medium">{review.title}</div>
+                      <div className="text-gray-500">{review.company}</div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
+          </div>
 
-            {/* Navigation Controls */}
-            <div className="flex items-center justify-center space-x-4">
-              {/* Previous Button */}
-              <button
-                onClick={prevSlide}
-                className="p-2 rounded-full border border-gray-300 hover:border-[#00685E] hover:bg-[#00685E] hover:text-white transition-colors"
-                disabled={totalSlides <= 1}
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-
-              {/* Slide Indicators */}
-              <div className="flex space-x-2">
-                {Array.from({ length: totalSlides }).map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 rounded-full transition-colors ${
-                      index === currentSlide ? 'bg-[#00685E]' : 'bg-gray-300'
-                    }`}
-                  />
-                ))}
-              </div>
-
-              {/* Next Button */}
-              <button
-                onClick={nextSlide}
-                className="p-2 rounded-full border border-gray-300 hover:border-[#00685E] hover:bg-[#00685E] hover:text-white transition-colors"
-                disabled={totalSlides <= 1}
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
+          {/* Status Indicator */}
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-500">
+              {isPaused ? "Paused - Move cursor away to resume" : "Hover to pause • Auto-advancing every 8 seconds"}
+            </p>
           </div>
 
           {/* Call to Action */}
@@ -288,70 +292,6 @@ Let's build your dream team, one standout candidate at a time!
         </div>
       </section>
 
-      {/* Featured Solutions Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Complete Technical Hiring Solution
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              From initial screening to final evaluation, streamline your entire technical hiring process
-            </p>
-          </div>
-
-          {/* Solutions Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {[
-              {
-                title: "Live Coding Interviews",
-                description: "Conduct real-time technical interviews with our advanced platform",
-                features: ["Real-time collaboration", "50+ programming languages", "Instant feedback"],
-                color: "blue"
-              },
-              {
-                title: "Skills Assessment",
-                description: "Comprehensive evaluation of technical competencies and problem-solving",
-                features: ["Custom test creation", "Automated scoring", "Detailed analytics"],
-                color: "green"
-              },
-              {
-                title: "Candidate Pipeline",
-                description: "Manage and track candidates through your entire hiring process",
-                features: ["Pipeline management", "Team collaboration", "Integration ready"],
-                color: "purple"
-              }
-            ].map((solution, index) => (
-              <div key={index} className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-blue-200 transition-all duration-200">
-                <div className={`w-12 h-12 bg-${solution.color}-100 rounded-xl flex items-center justify-center mb-4`}>
-                  <Building2 className={`w-6 h-6 text-${solution.color}-600`} />
-                </div>
-                
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  {solution.title}
-                </h3>
-                <p className="text-gray-600 mb-4">{solution.description}</p>
-                
-                <ul className="space-y-2">
-                  {solution.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-sm text-gray-500 flex items-center">
-                      <ChevronRight className="w-4 h-4 mr-2 text-gray-400" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <button className="bg-[#00685E] hover:bg-[#39625e] text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
-              <span>Explore All Features</span>
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-[#00685E] to-[#003c36]">
@@ -363,10 +303,10 @@ Let's build your dream team, one standout candidate at a time!
             Join hundreds of companies who have improved their hiring quality and efficiency with SagePaths.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 hover:bg-gray-50 px-8 py-4 rounded-lg font-semibold transition-colors">
+            <button className="bg-white text-[#00685E] hover:bg-gray-50 px-8 py-4 rounded-lg font-semibold transition-colors">
               Request Demo
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold transition-colors">
+            <button className="border-2 border-white text-white hover:bg-white hover:text-[#00685E] px-8 py-4 rounded-lg font-semibold transition-colors">
               Schedule Consultation
             </button>
           </div>

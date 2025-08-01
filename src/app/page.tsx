@@ -1,12 +1,13 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Building2, ChevronRight } from 'lucide-react'
+import { ArrowRight, Building2, ChevronRight, ChevronLeft } from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export default function HomePage() {
   const [isVisible, setIsVisible] = useState(true)
   const [lastScrollY, setLastScrollY] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
     let ticking = false
@@ -36,6 +37,74 @@ export default function HomePage() {
     window.addEventListener('scroll', requestTick)
     return () => window.removeEventListener('scroll', requestTick)
   }, [lastScrollY])
+
+  const reviews = [
+    {
+      name: "Sarah Chen",
+      title: "Head of Engineering",
+      company: "TechFlow Inc.",
+      review: "SagePaths completely transformed our hiring process. We reduced our time-to-hire by 40% while significantly improving candidate quality. The technical assessments are spot-on.",
+      initials: "SC",
+      color: "bg-blue-500"
+    },
+    {
+      name: "Michael Rodriguez",
+      title: "VP of Talent Acquisition",
+      company: "DataCorp Solutions",
+      review: "The live coding interviews feature is a game-changer. Our engineering team loves how seamless the collaboration is, and candidates appreciate the real-world problem-solving approach.",
+      initials: "MR",
+      color: "bg-green-500"
+    },
+    {
+      name: "Emily Johnson",
+      title: "CTO",
+      company: "StartupXYZ",
+      review: "As a growing startup, we needed a scalable hiring solution. SagePaths delivered exactly that - professional, efficient, and cost-effective. Highly recommend!",
+      initials: "EJ",
+      color: "bg-purple-500"
+    },
+    {
+      name: "David Park",
+      title: "Engineering Manager",
+      company: "InnovateLabs",
+      review: "The candidate pipeline management is incredibly intuitive. We can track every step of our hiring process and make data-driven decisions. Outstanding platform!",
+      initials: "DP",
+      color: "bg-orange-500"
+    },
+    {
+      name: "Lisa Thompson",
+      title: "HR Director",
+      company: "CloudTech Systems",
+      review: "SagePaths helped us build our entire development team. Their expertise in technical recruiting is unmatched, and the results speak for themselves.",
+      initials: "LT",
+      color: "bg-pink-500"
+    },
+    {
+      name: "James Wilson",
+      title: "Senior Developer",
+      company: "DevStudio Pro",
+      review: "From a candidate's perspective, the interview experience was smooth and professional. Now as a hiring manager, I see why companies choose SagePaths.",
+      initials: "JW",
+      color: "bg-teal-500"
+    }
+  ]
+
+  const reviewsPerSlide = 3
+  const totalSlides = Math.ceil(reviews.length / reviewsPerSlide)
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % totalSlides)
+  }
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)
+  }
+
+  const getCurrentReviews = () => {
+    const startIndex = currentSlide * reviewsPerSlide
+    return reviews.slice(startIndex, startIndex + reviewsPerSlide)
+  }
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
@@ -83,7 +152,7 @@ No upfront fees.<br/>No guesswork.<br/>Just great hires.
 </h1>
 
 <p className="text-lg text-gray-700 mb-10 leading-relaxed max-w-xl">
-Let’s build your dream team, one standout candidate at a time!
+Let's build your dream team, one standout candidate at a time!
 </p>
 
               
@@ -135,25 +204,86 @@ Let’s build your dream team, one standout candidate at a time!
         </div>
       </section>
 
-      {/* Companies Section */}
+      {/* Reviews Section */}
       <section className="py-20 bg-[#f8fffe]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-              Trusted by Leading Companies
+              What Our Clients Say
             </h2>
             <p className="text-xl text-gray-600">
-              Join industry leaders who choose SagePaths for their hiring needs
+              Real stories from companies who transformed their hiring process
             </p>
           </div>
 
-          {/* Company Logos Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center justify-items-center opacity-60">
-            {['TechCorp', 'StartupXYZ', 'DataFlow', 'InnovateLabs', 'DevStudio', 'CloudTech'].map((company, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg border border-gray-200 w-full flex items-center justify-center h-20">
-                <span className="text-gray-600 font-semibold">{company}</span>
+          {/* Reviews Carousel */}
+          <div className="relative">
+            {/* Reviews Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              {getCurrentReviews().map((review, index) => (
+                <div key={`${currentSlide}-${index}`} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1">
+                  {/* Review Text */}
+                  <p className="text-gray-700 mb-6 leading-relaxed text-lg">
+                    "{review.review}"
+                  </p>
+
+                  {/* Author Info */}
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-12 h-12 ${review.color} rounded-full flex items-center justify-center text-white font-semibold`}>
+                      {review.initials}
+                    </div>
+                    <div>
+                      <div className="font-semibold text-gray-900">{review.name}</div>
+                      <div className="text-sm text-gray-600">{review.title}</div>
+                      <div className="text-sm text-gray-500">{review.company}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation Controls */}
+            <div className="flex items-center justify-center space-x-4">
+              {/* Previous Button */}
+              <button
+                onClick={prevSlide}
+                className="p-2 rounded-full border border-gray-300 hover:border-[#00685E] hover:bg-[#00685E] hover:text-white transition-colors"
+                disabled={totalSlides <= 1}
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+
+              {/* Slide Indicators */}
+              <div className="flex space-x-2">
+                {Array.from({ length: totalSlides }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-colors ${
+                      index === currentSlide ? 'bg-[#00685E]' : 'bg-gray-300'
+                    }`}
+                  />
+                ))}
               </div>
-            ))}
+
+              {/* Next Button */}
+              <button
+                onClick={nextSlide}
+                className="p-2 rounded-full border border-gray-300 hover:border-[#00685E] hover:bg-[#00685E] hover:text-white transition-colors"
+                disabled={totalSlides <= 1}
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Call to Action */}
+          <div className="text-center mt-12">
+            <p className="text-gray-600 mb-6">Ready to join our success stories?</p>
+            <button className="bg-[#00685E] hover:bg-[#39625e] text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+              <span>Get Started Today</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </section>
@@ -215,7 +345,7 @@ Let’s build your dream team, one standout candidate at a time!
           </div>
 
           <div className="text-center">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+            <button className="bg-[#00685E] hover:bg-[#39625e] text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
               <span>Explore All Features</span>
               <ArrowRight className="w-5 h-5" />
             </button>
@@ -224,7 +354,7 @@ Let’s build your dream team, one standout candidate at a time!
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-indigo-600">
+      <section className="py-20 bg-gradient-to-r from-[#00685E] to-[#003c36]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
             Ready to Transform Your Technical Hiring?

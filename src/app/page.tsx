@@ -10,8 +10,16 @@ export default function HomePage() {
   const [currentSet, setCurrentSet] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
+  // Mount effect to prevent hydration issues
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
+    if (!isMounted) return // Only run on client side
+    
     let ticking = false
 
     const controlNavbar = () => {
@@ -38,7 +46,7 @@ export default function HomePage() {
 
     window.addEventListener('scroll', requestTick)
     return () => window.removeEventListener('scroll', requestTick)
-  }, [lastScrollY])
+  }, [lastScrollY, isMounted])
 
   const reviews = [
     {
@@ -93,27 +101,27 @@ export default function HomePage() {
 
   // Auto-scroll carousel
   useEffect(() => {
-    if (!isPaused) {
-      const interval = setInterval(() => {
-        setIsTransitioning(true)
-        
-        setTimeout(() => {
-          setCurrentSet(prev => {
-            const totalSets = Math.ceil(reviews.length / 3)
-            return (prev + 1) % totalSets
-          })
-          
-          // Wait a bit longer before starting fade in
-          setTimeout(() => {
-            setIsTransitioning(false)
-          }, 600) // Delay before fade in starts
-        }, 3000) // Wait for complete staggered fade out
-        
-      }, 8000) // Increased total cycle time to accommodate longer transitions
+    if (!isMounted || isPaused) return // Only run on client side and when not paused
+    
+    const interval = setInterval(() => {
+      setIsTransitioning(true)
       
-      return () => clearInterval(interval)
-    }
-  }, [isPaused, reviews.length])
+      setTimeout(() => {
+        setCurrentSet(prev => {
+          const totalSets = Math.ceil(reviews.length / 3)
+          return (prev + 1) % totalSets
+        })
+        
+        // Wait a bit longer before starting fade in
+        setTimeout(() => {
+          setIsTransitioning(false)
+        }, 600) // Delay before fade in starts
+      }, 3000) // Wait for complete staggered fade out
+      
+    }, 8000) // Increased total cycle time to accommodate longer transitions
+    
+    return () => clearInterval(interval)
+  }, [isPaused, reviews.length, isMounted])
 
   // Get current set of 3 reviews
   const getCurrentReviewSet = () => {
@@ -125,13 +133,13 @@ export default function HomePage() {
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
       <header className={`border-b sticky top-0 z-50 bg-[#00685E] backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
+        isMounted ? (isVisible ? 'translate-y-0' : '-translate-y-full') : 'translate-y-0'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
-<img src="/logo_white.png" alt="SagePaths" className="h-14 w-auto" />
+              <img src="/logo_white.png" alt="SagePaths" className="h-14 w-auto" />
             </div>
 
             {/* Navigation */}
@@ -146,9 +154,6 @@ export default function HomePage() {
                 Contact Me
               </Link>
             </nav>
-
-            {/* CTA Buttons */}
-  
           </div>
         </div>
       </header>
@@ -159,32 +164,30 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div>
-<div className="mb-4">
-  <span className="text-[#00685E] font-light text-base">Where Talent Meets Precision</span>
-</div>
+              <div className="mb-4">
+                <span className="text-[#00685E] font-light text-base">Where Talent Meets Precision</span>
+              </div>
 
-<h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-No upfront fees.<br/>No guesswork.<br/>Just great hires.
-</h1>
+              <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                No upfront fees.<br/>No guesswork.<br/>Just great hires.
+              </h1>
 
-<p className="text-lg text-gray-700 mb-10 leading-relaxed max-w-xl">
-Let's build your dream team, one standout candidate at a time!
-</p>
+              <p className="text-lg text-gray-700 mb-10 leading-relaxed max-w-xl">
+                Let's build your dream team, one standout candidate at a time!
+              </p>
 
-              
-<div className="w-full max-w-md">
-  <div className="relative rounded-xl bg-white/80 backdrop-blur-md shadow-md border border-white/50">
-    <input
-      type="text"
-      placeholder="Search roles to find your perfect match"
-      className="w-full pl-5 pr-32 py-4 bg-transparent text-gray-800 placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
-    />
-<button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#00685E] hover:bg-[#3e6864] text-white font-semibold px-5 py-2 rounded-lg transition">
-  Search
-</button>
-  </div>
-</div>
-
+              <div className="w-full max-w-md">
+                <div className="relative rounded-xl bg-white/80 backdrop-blur-md shadow-md border border-white/50">
+                  <input
+                    type="text"
+                    placeholder="Search roles to find your perfect match"
+                    className="w-full pl-5 pr-32 py-4 bg-transparent text-gray-800 placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
+                  />
+                  <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#00685E] hover:bg-[#3e6864] text-white font-semibold px-5 py-2 rounded-lg transition">
+                    Search
+                  </button>
+                </div>
+              </div>
             </div>
 
             {/* Right Content - Dual Overlapping Videos */}
@@ -215,12 +218,12 @@ Let's build your dream team, one standout candidate at a time!
                 <div className="absolute top-4 left-4 w-20 h-20 bg-white/20 rounded-full filter blur-2xl"></div>
               </div>
             </div>
-
           </div>
         </div>
       </section>
 
-       <section className="py-20  bg-linear-to-t from-[#e8fcf9] to-[#f8fffe]">
+      {/* Complete Hiring Solution Section */}
+      <section className="py-20 bg-[#f8fffe]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -231,53 +234,53 @@ Let's build your dream team, one standout candidate at a time!
             </p>
           </div>
 
-          {/* Solutions Grid */}
+          {/* Solutions Card Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {[
               {
-                title: "Live Coding Interviews",
-                description: "Conduct real-time interviews with our advanced platform",
-                features: ["Real-time collaboration", "50+ programming languages", "Instant feedback"],
-                color: "blue"
+                title: "Role Scoping & Job Description Support",
+                description: "Expert guidance to define role requirements and craft compelling job descriptions"
               },
               {
-                title: "Skills Assessment",
-                description: "Comprehensive evaluation of competencies and problem-solving",
-                features: ["Custom test creation", "Automated scoring", "Detailed analytics"],
-                color: "green"
+                title: "Automated Sourcing & Outreach via AI",
+                description: "Leverage advanced AI technology to identify and engage top talent automatically"
               },
               {
-                title: "Candidate Pipeline",
-                description: "Manage and track candidates through your entire hiring process",
-                features: ["Pipeline management", "Team collaboration", "Integration ready"],
-                color: "purple"
+                title: "Pre-Screening Interviews & Assessments",
+                description: "Comprehensive evaluation process to ensure only qualified candidates advance"
+              },
+              {
+                title: "Scheduling & Interview Coordination",
+                description: "Seamless coordination of all interview stages with your team and candidates"
+              },
+              {
+                title: "Reference Checks & Offer Support",
+                description: "Thorough background verification and assistance with offer negotiations"
+              },
+              {
+                title: "Dedicated Account Manager for Each Role",
+                description: "Personal point of contact ensuring consistent communication and quality service"
               }
             ].map((solution, index) => (
-              <div key={index} className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-blue-200 transition-all duration-200">
-                <div className={`w-12 h-12 bg-${solution.color}-100 rounded-xl flex items-center justify-center mb-4`}>
-                  <Building2 className={`w-6 h-6 text-${solution.color}-600`} />
+              <div key={index} className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-[#00685E] transition-all duration-200">
+                {/* Light green background with darker green checkmark */}
+                <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#00685E" fill="none">
+                    <path d="M5 14L8.5 17.5L19 6.5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"></path>
+                  </svg>
                 </div>
                 
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   {solution.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{solution.description}</p>
-                
-                <ul className="space-y-2">
-                  {solution.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="text-sm text-gray-500 flex items-center">
-                      <ChevronRight className="w-4 h-4 mr-2 text-gray-400" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-gray-600">{solution.description}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center">
             <button className="bg-[#00685E] hover:bg-[#39625e] text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
-              <span>Explore All Features</span>
+              <span>Submit a Hiring Request</span>
               <ArrowRight className="w-5 h-5" />
             </button>
           </div>
@@ -285,7 +288,7 @@ Let's build your dream team, one standout candidate at a time!
       </section>
 
       {/* Reviews Section - Crossfade */}
-      <section className="py-20 bg-[#e8fcf9]">
+      <section className="py-20 bg-[#f8fffe]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -299,8 +302,8 @@ Let's build your dream team, one standout candidate at a time!
           {/* Crossfade Container */}
           <div 
             className="relative min-h-[400px]"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            onMouseEnter={() => isMounted && setIsPaused(true)}
+            onMouseLeave={() => isMounted && setIsPaused(false)}
           >
             {/* Current Set of Reviews */}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -308,11 +311,11 @@ Let's build your dream team, one standout candidate at a time!
                 <div 
                   key={`${currentSet}-${index}`} 
                   className={`bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-2000 ease-in-out h-full ${
-                    isTransitioning ? 'opacity-0' : 'opacity-100'
+                    isMounted && isTransitioning ? 'opacity-0' : 'opacity-100'
                   }`}
-                  style={{
+                  style={isMounted ? {
                     transitionDelay: isTransitioning ? `${index * 700}ms` : `${(2 - index) * 700}ms`
-                  }}
+                  } : {}}
                 >
                   {/* Large Quote Mark */}
                   <div className="text-6xl text-[#00685E] font-serif leading-none mb-4 opacity-20">"</div>
@@ -341,7 +344,7 @@ Let's build your dream team, one standout candidate at a time!
           {/* Status Indicator */}
           <div className="text-center mt-8">
             <p className="text-sm text-gray-500">
-              {isPaused ? "Paused - Move cursor away to resume" : "Hover to pause • Auto-advancing every 8 seconds"}
+              {isMounted ? (isPaused ? "Paused - Move cursor away to resume" : "Hover to pause • Auto-advancing every 8 seconds") : "Loading..."}
             </p>
           </div>
 
@@ -355,7 +358,6 @@ Let's build your dream team, one standout candidate at a time!
           </div>
         </div>
       </section>
-
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-[#00685E] to-[#003c36]">

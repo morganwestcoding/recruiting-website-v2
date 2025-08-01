@@ -45,7 +45,7 @@ export default function HomePage() {
       name: "Sarah Chen",
       title: "Head of Engineering",
       company: "TechFlow Inc.",
-      review: "SagePaths completely transformed our hiring process. We reduced our time-to-hire by 40% while significantly improving candidate quality. The technical assessments are spot-on.",
+      review: "SagePaths completely transformed our hiring process. We reduced our time-to-hire by 40% while significantly improving candidate quality. The assessments are spot-on.",
       initials: "SC",
       color: "bg-blue-500"
     },
@@ -77,7 +77,7 @@ export default function HomePage() {
       name: "Lisa Thompson",
       title: "HR Director",
       company: "CloudTech Systems",
-      review: "SagePaths helped us build our entire development team. Their expertise in technical recruiting is unmatched, and the results speak for themselves.",
+      review: "SagePaths helped us build our entire development team. Their expertise in recruiting is unmatched, and the results speak for themselves.",
       initials: "LT",
       color: "bg-pink-500"
     },
@@ -124,7 +124,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
-      <header className={`border-b sticky top-0 z-50 bg-[#00685E]/80 backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
+      <header className={`border-b sticky top-0 z-50 bg-[#00685E] backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -220,8 +220,72 @@ Let's build your dream team, one standout candidate at a time!
         </div>
       </section>
 
+       <section className="py-20  bg-linear-to-t from-[#e8fcf9] to-[#f8fffe]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Complete Hiring Solution
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              From initial screening to final evaluation, streamline your entire hiring process
+            </p>
+          </div>
+
+          {/* Solutions Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              {
+                title: "Live Coding Interviews",
+                description: "Conduct real-time interviews with our advanced platform",
+                features: ["Real-time collaboration", "50+ programming languages", "Instant feedback"],
+                color: "blue"
+              },
+              {
+                title: "Skills Assessment",
+                description: "Comprehensive evaluation of competencies and problem-solving",
+                features: ["Custom test creation", "Automated scoring", "Detailed analytics"],
+                color: "green"
+              },
+              {
+                title: "Candidate Pipeline",
+                description: "Manage and track candidates through your entire hiring process",
+                features: ["Pipeline management", "Team collaboration", "Integration ready"],
+                color: "purple"
+              }
+            ].map((solution, index) => (
+              <div key={index} className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-blue-200 transition-all duration-200">
+                <div className={`w-12 h-12 bg-${solution.color}-100 rounded-xl flex items-center justify-center mb-4`}>
+                  <Building2 className={`w-6 h-6 text-${solution.color}-600`} />
+                </div>
+                
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  {solution.title}
+                </h3>
+                <p className="text-gray-600 mb-4">{solution.description}</p>
+                
+                <ul className="space-y-2">
+                  {solution.features.map((feature, featureIndex) => (
+                    <li key={featureIndex} className="text-sm text-gray-500 flex items-center">
+                      <ChevronRight className="w-4 h-4 mr-2 text-gray-400" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <button className="bg-[#00685E] hover:bg-[#39625e] text-white px-8 py-3 rounded-lg font-semibold transition-colors inline-flex items-center space-x-2">
+              <span>Explore All Features</span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </section>
+
       {/* Reviews Section - Crossfade */}
-      <section className="py-20 bg-[#f8fffe]">
+      <section className="py-20 bg-[#e8fcf9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -297,7 +361,7 @@ Let's build your dream team, one standout candidate at a time!
       <section className="py-20 bg-gradient-to-r from-[#00685E] to-[#003c36]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
-            Ready to Transform Your Technical Hiring?
+            Ready to Transform Your Hiring?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
             Join hundreds of companies who have improved their hiring quality and efficiency with SagePaths.
@@ -319,10 +383,10 @@ Let's build your dream team, one standout candidate at a time!
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <img src="/Logo-White.png" alt="SagePaths" className="h-8 w-auto" />
+                <img src="/logo_white.png" alt="SagePaths" className="h-12 w-auto" />
               </div>
               <p className="text-gray-400">
-                Transforming technical hiring through innovative assessment and interview solutions.
+                Transforming hiring through innovative assessment and interview solutions.
               </p>
             </div>
             

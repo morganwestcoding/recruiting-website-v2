@@ -40,7 +40,7 @@ export default function ContactPage() {
             <span className="text-[#00685E] font-light text-lg">Get In Touch</span>
           </div>
           
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
             Contact Me
           </h1>
           

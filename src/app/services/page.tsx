@@ -40,7 +40,7 @@ export default function ServicesPage() {
             <span className="text-[#00685E] font-light text-lg">What We Offer</span>
           </div>
           
-          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+          <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
             Our Services
           </h1>
           

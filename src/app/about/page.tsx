@@ -72,15 +72,15 @@ export default function AboutPage() {
                 {/* Bio Content */}
                 <div className="space-y-6">
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    <span className="font-semibold text-gray-900">With experience across legal, technology, manufacturing, construction, finance, and accounting recruitment,</span> I&apos;m passionate about finding the right people for the right roles, every time.
+                    <span className=" text-gray-900">With experience across legal, technology, manufacturing, construction, finance, and accounting recruitment,</span> I&apos;m passionate about finding the right people for the right roles, every time.
                   </p>
 
-                  <p className="text-lg text-gray-700 leading-relaxed">
+                  <p className="text-lg text-gray-900 leading-relaxed">
                     I believe recruiting is more than just matching resumes — it&apos;s about understanding company culture, business goals, and candidate aspirations. That&apos;s why I combine personalized, hands-on service with cutting-edge AI tools to streamline the hiring process without losing the human touch.
                   </p>
 
-                  <p className="text-lg text-gray-700 leading-relaxed">
-                    <span className="font-semibold text-[#00685E]">If you&apos;re looking for a recruiting partner who&apos;s dedicated, efficient, and truly cares about your team&apos;s success, let&apos;s connect.</span>
+                  <p className="text-lg text-gray-900 leading-relaxed">
+                    <span>If you&apos;re looking for a recruiting partner who&apos;s dedicated, efficient, and truly cares about your team&apos;s success, let&apos;s connect.</span>
                   </p>
                 </div>
 

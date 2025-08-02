@@ -50,7 +50,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-8">
             
             {/* Left Card - Photo */}
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 ">
               <div className="relative">
                 <img 
                   src="/placeholder.jpg" 
@@ -135,7 +135,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {[
               { name: "Legal", description: "Law firms, corporate legal departments, compliance roles" },
               { name: "Technology", description: "Software development, IT infrastructure, digital transformation" },

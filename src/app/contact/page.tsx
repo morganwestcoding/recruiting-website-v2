@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Mail, Phone, Calendar, Clock, MapPin, MessageCircle } from 'lucide-react'
+import { Mail, Phone, Calendar, Clock } from 'lucide-react'
 
 export default function ContactPage() {
   return (
@@ -45,7 +45,7 @@ export default function ContactPage() {
           </h1>
           
           <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Ready to transform your hiring process? Let's discuss how we can help you find the perfect candidates for your team.
+            Ready to transform your hiring process? Let&apos;s discuss how we can help you find the perfect candidates for your team.
           </p>
         </div>
       </section>
@@ -106,10 +106,10 @@ export default function ContactPage() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-3">Best Time to Reach Me</h3>
             <p className="text-gray-600 mb-4">
-              I'm typically available Monday through Friday, 9 AM to 6 PM PST. 
+              I&apos;m typically available Monday through Friday, 9 AM to 6 PM PST. 
             </p>
             <p className="text-gray-600">
-              For urgent matters, feel free to call anytime and leave a message if I don't answer immediately.
+              For urgent matters, feel free to call anytime and leave a message if I don&apos;t answer immediately.
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Initial Consultation</h3>
               <p className="text-gray-600">
-                We'll discuss your hiring needs, company culture, and ideal candidate profile.
+                We&apos;ll discuss your hiring needs, company culture, and ideal candidate profile.
               </p>
             </div>
 
@@ -144,7 +144,7 @@ export default function ContactPage() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Custom Strategy</h3>
               <p className="text-gray-600">
-                I'll create a tailored recruitment approach based on your specific requirements.
+                I&apos;ll create a tailored recruitment approach based on your specific requirements.
               </p>
             </div>
 
@@ -154,7 +154,7 @@ export default function ContactPage() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Results Delivery</h3>
               <p className="text-gray-600">
-                You'll receive qualified candidates who are genuinely interested in your opportunity.
+                You&apos;ll receive qualified candidates who are genuinely interested in your opportunity.
               </p>
             </div>
           </div>
@@ -188,7 +188,7 @@ export default function ContactPage() {
             <div className="bg-gray-50 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Do you offer guarantees?</h3>
               <p className="text-gray-600">
-                Yes, I provide a replacement guarantee if a placed candidate doesn't work out within the agreed timeframe.
+                Yes, I provide a replacement guarantee if a placed candidate doesn&apos;t work out within the agreed timeframe.
               </p>
             </div>
           </div>
@@ -202,7 +202,7 @@ export default function ContactPage() {
             Ready to Get Started?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Let's find your next great hire together. Reach out today to discuss your needs.
+            Let&apos;s find your next great hire together. Reach out today to discuss your needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 

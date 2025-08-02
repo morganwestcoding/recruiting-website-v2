@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Mail, Phone, Linkedin, Globe } from 'lucide-react'
+import { Mail, Phone, Linkedin, Globe } from 'lucide-react'
 
 export default function AboutPage() {
   return (
@@ -42,7 +42,7 @@ export default function AboutPage() {
             <div className="mb-4">
               <span className="text-[#00685E] font-light text-lg">Meet the Founder</span>
             </div>
-            <h1 className="text-lg lg:text-xl font-sans text-gray-900 leading-tight">
+            <h1 className="text-xl lg:text-2xl font-semibold text-gray-900 leading-tight">
               Founder of SagePaths — where smart recruiting meets human connection
             </h1>
           </div>
@@ -50,7 +50,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-8">
             
             {/* Left Card - Photo */}
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100 ">
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
               <div className="relative">
                 <img 
                   src="/placeholder.jpg" 
@@ -72,15 +72,15 @@ export default function AboutPage() {
                 {/* Bio Content */}
                 <div className="space-y-6">
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    <span className="font-normal text-gray-900">With experience across legal, technology, manufacturing, construction, finance, and accounting recruitment,</span> I'm passionate about finding the right people for the right roles, every time.
+                    <span className="font-semibold text-gray-900">With experience across legal, technology, manufacturing, construction, finance, and accounting recruitment,</span> I&apos;m passionate about finding the right people for the right roles, every time.
                   </p>
 
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    I believe recruiting is more than just matching resumes — it's about understanding company culture, business goals, and candidate aspirations. That's why I combine personalized, hands-on service with cutting-edge AI tools to streamline the hiring process without losing the human touch.
+                    I believe recruiting is more than just matching resumes — it&apos;s about understanding company culture, business goals, and candidate aspirations. That&apos;s why I combine personalized, hands-on service with cutting-edge AI tools to streamline the hiring process without losing the human touch.
                   </p>
 
                   <p className="text-lg text-gray-700 leading-relaxed">
-                    <span className="font-normal text-gray-700">If you're looking for a recruiting partner who's dedicated, efficient, and truly cares about your team's success, let's connect.</span>
+                    <span className="font-semibold text-[#00685E]">If you&apos;re looking for a recruiting partner who&apos;s dedicated, efficient, and truly cares about your team&apos;s success, let&apos;s connect.</span>
                   </p>
                 </div>
 
@@ -135,7 +135,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { name: "Legal", description: "Law firms, corporate legal departments, compliance roles" },
               { name: "Technology", description: "Software development, IT infrastructure, digital transformation" },

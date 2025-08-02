@@ -2,55 +2,12 @@
 
 import Link from 'next/link'
 import { ArrowRight, Mail, Phone, Linkedin, Globe } from 'lucide-react'
-import { useState, useEffect } from 'react'
 
 export default function AboutPage() {
-  const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
-  const [isMounted, setIsMounted] = useState(false)
-
-  // Mount effect to prevent hydration issues
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  useEffect(() => {
-    if (!isMounted) return // Only run on client side
-    
-    let ticking = false
-
-    const controlNavbar = () => {
-      const currentScrollY = window.scrollY
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        // Scrolling down & past 100px
-        setIsVisible(false)
-      } else {
-        // Scrolling up
-        setIsVisible(true)
-      }
-      
-      setLastScrollY(currentScrollY)
-      ticking = false
-    }
-
-    const requestTick = () => {
-      if (!ticking) {
-        requestAnimationFrame(controlNavbar)
-        ticking = true
-      }
-    }
-
-    window.addEventListener('scroll', requestTick)
-    return () => window.removeEventListener('scroll', requestTick)
-  }, [lastScrollY, isMounted])
-
   return (
     <div className="min-h-screen bg-white">
       {/* Header Navigation */}
-      <header className={`border-b sticky top-0 z-50 bg-[#00685E] backdrop-blur-md transform transition-transform duration-300 ease-in-out ${
-        isMounted ? (isVisible ? 'translate-y-0' : '-translate-y-full') : 'translate-y-0'
-      }`}>
+      <header className="border-b sticky top-0 z-50 bg-[#00685E] backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -76,108 +33,87 @@ export default function AboutPage() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="bg-[#f8fffe] py-20 lg:py-32">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="mb-8">
-            <span className="text-[#00685E] font-light text-lg">Meet the Founder</span>
-          </div>
-          
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-            Hi, I'm Kylie
-          </h1>
-          
-          <p className="text-xl text-gray-600 mb-12 leading-relaxed">
-            Founder of SagePaths — where smart recruiting meets human connection
-          </p>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="py-20 bg-white">
+      {/* Main Content - Modern Card Layout */}
+      <section className="bg-[#f8fffe] py-12 lg:py-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Header */}
+          <div className="text-center mb-16">
+            <div className="mb-4">
+              <span className="text-[#00685E] font-light text-lg">Meet the Founder</span>
+            </div>
+            <h1 className="text-lg lg:text-xl font-sans text-gray-900 leading-tight">
+              Founder of SagePaths — where smart recruiting meets human connection
+            </h1>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
             
-            {/* Left - Photo Placeholder */}
-            <div className="order-2 lg:order-1">
+            {/* Left Card - Photo */}
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
               <div className="relative">
-                {/* Photo placeholder - you can replace this with actual photo */}
-                <div className="w-full max-w-md mx-auto aspect-square bg-gradient-to-br from-[#00685E] to-[#4bb79f] rounded-3xl flex items-center justify-center text-white text-6xl font-bold shadow-2xl">
-                  K
-                </div>
+                <img 
+                  src="/placeholder.jpg" 
+                  alt="Kylie - Founder of SagePaths" 
+                  className="w-full aspect-square object-cover rounded-2xl"
+                />
                 
-                {/* Decorative elements */}
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-[#7db9b6] rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
-                <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#4bb79f] rounded-full mix-blend-multiply filter blur-xl opacity-30"></div>
+                {/* Floating badge */}
+                <div className="absolute -bottom-4 -right-4 bg-[#00685E] text-white px-6 py-3 rounded-2xl shadow-lg">
+                  <span className="font-semibold text-sm">Founder & CEO</span>
+                </div>
               </div>
             </div>
 
-            {/* Right - Content */}
-            <div className="order-1 lg:order-2">
-              <div className="space-y-6">
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  <span className="font-semibold text-gray-900">With experience across legal, technology, manufacturing, construction, finance, and accounting recruitment,</span> I'm passionate about finding the right people for the right roles, every time.
-                </p>
+            {/* Right Card - Content */}
+            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
+              <div className="h-full flex flex-col justify-between">
+                
+                {/* Bio Content */}
+                <div className="space-y-6">
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    <span className="font-normal text-gray-900">With experience across legal, technology, manufacturing, construction, finance, and accounting recruitment,</span> I'm passionate about finding the right people for the right roles, every time.
+                  </p>
 
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  I believe recruiting is more than just matching resumes — it's about understanding company culture, business goals, and candidate aspirations. That's why I combine personalized, hands-on service with cutting-edge AI tools to streamline the hiring process without losing the human touch.
-                </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    I believe recruiting is more than just matching resumes — it's about understanding company culture, business goals, and candidate aspirations. That's why I combine personalized, hands-on service with cutting-edge AI tools to streamline the hiring process without losing the human touch.
+                  </p>
 
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  <span className="font-semibold text-[#00685E]">If you're looking for a recruiting partner who's dedicated, efficient, and truly cares about your team's success, let's connect.</span>
-                </p>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    <span className="font-normal text-gray-700">If you're looking for a recruiting partner who's dedicated, efficient, and truly cares about your team's success, let's connect.</span>
+                  </p>
+                </div>
 
-                {/* Contact Information */}
-                <div className="pt-8 space-y-4">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-6">Let's Connect</h3>
-                  
-                  <div className="space-y-4">
-                    {/* Email */}
+                {/* Contact CTA */}
+                <div className="pt-6 border-t border-gray-100">
+                  <div className="flex justify-center space-x-4">
                     <a 
-                      href="mailto:kylie@sagepaths.co" 
-                      className="flex items-center space-x-3 text-gray-700 hover:text-[#00685E] transition-colors group"
+                      href="mailto:kylie@sagepaths.co"
+                      className="w-10 h-10 bg-gray-100 hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors group"
                     >
-                      <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors">
-                        <Mail className="w-5 h-5 text-gray-600 group-hover:text-white" />
-                      </div>
-                      <span className="text-lg">kylie@sagepaths.co</span>
+                      <Mail className="w-5 h-5 text-gray-600 group-hover:text-white" />
                     </a>
-
-                    {/* Phone */}
                     <a 
-                      href="tel:+19495045794" 
-                      className="flex items-center space-x-3 text-gray-700 hover:text-[#00685E] transition-colors group"
+                      href="tel:+19495045794"
+                      className="w-10 h-10 bg-gray-100 hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors group"
                     >
-                      <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors">
-                        <Phone className="w-5 h-5 text-gray-600 group-hover:text-white" />
-                      </div>
-                      <span className="text-lg">(949) 504-5794</span>
+                      <Phone className="w-5 h-5 text-gray-600 group-hover:text-white" />
                     </a>
-
-                    {/* LinkedIn */}
                     <a 
                       href="https://www.linkedin.com/in/kyliemasumiya/" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-3 text-gray-700 hover:text-[#00685E] transition-colors group"
+                      className="w-10 h-10 bg-gray-100 hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors group"
                     >
-                      <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors">
-                        <Linkedin className="w-5 h-5 text-gray-600 group-hover:text-white" />
-                      </div>
-                      <span className="text-lg">LinkedIn Profile</span>
+                      <Linkedin className="w-5 h-5 text-gray-600 group-hover:text-white" />
                     </a>
-
-                    {/* Website */}
                     <a 
                       href="https://sagepaths.co" 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="flex items-center space-x-3 text-gray-700 hover:text-[#00685E] transition-colors group"
+                      className="w-10 h-10 bg-gray-100 hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors group"
                     >
-                      <div className="w-10 h-10 bg-gray-100 group-hover:bg-[#00685E] rounded-lg flex items-center justify-center transition-colors">
-                        <Globe className="w-5 h-5 text-gray-600 group-hover:text-white" />
-                      </div>
-                      <span className="text-lg">sagepaths.co</span>
+                      <Globe className="w-5 h-5 text-gray-600 group-hover:text-white" />
                     </a>
                   </div>
                 </div>
@@ -188,9 +124,9 @@ export default function AboutPage() {
       </section>
 
       {/* Experience Section */}
-      <section className="py-20 bg-[#f8fffe]">
+      <section className="py-12 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
               Industry Experience
             </h2>
@@ -218,7 +154,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[#00685E] to-[#003c36]">
+      <section className="py-16 bg-gradient-to-r from-[#00685E] to-[#003c36]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
             Ready to Build Your Dream Team?

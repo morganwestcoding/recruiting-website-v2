@@ -42,9 +42,13 @@ export default function AboutPage() {
             <div className="mb-4">
               <span className="text-[#00685E] font-light text-lg">Meet the Founder</span>
             </div>
-            <h1 className="text-xl lg:text-2xl font-semibold text-gray-900 leading-tight">
-              Founder of SagePaths — where smart recruiting meets human connection
-            </h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-8 leading-tight">
+            Founder of SagePaths 
+          </h1>
+          
+          <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+Where smart recruiting meets human connection
+          </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">

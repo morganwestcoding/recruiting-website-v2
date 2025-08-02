@@ -160,7 +160,7 @@ export default function AboutPage() {
             Ready to Build Your Dream Team?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Let's discuss how I can help you find the perfect candidates for your organization.
+            Let&apos;s discuss how I can help you find the perfect candidates for your organization.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 

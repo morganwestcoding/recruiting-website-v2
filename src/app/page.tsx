@@ -93,7 +93,7 @@ export default function HomePage() {
       name: "James Wilson",
       title: "Senior Developer",
       company: "DevStudio Pro",
-      review: "From a candidate&apos;s perspective, the interview experience was smooth and professional. Now as a hiring manager, I see why companies choose SagePaths.",
+      review: "From a candidate&apos;s perspective, the interview experience was smooth and professional. Now as a hiring manager, I see why companies choose SagePaths.&ldquo;",
       initials: "JW",
       color: "bg-teal-500"
     }

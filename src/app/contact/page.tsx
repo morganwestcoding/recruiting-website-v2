@@ -181,7 +181,7 @@ export default function ContactPage() {
             <div className="bg-gray-50 rounded-2xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-3">What are your fees?</h3>
               <p className="text-gray-600">
-                I work on a contingency basis, meaning you only pay when you successfully hire a candidate I've presented. No upfront costs or retainers.
+                I work on a contingency basis, meaning you only pay when you successfully hire a candidate I&apos;ve presented. No upfront costs or retainers.
               </p>
             </div>
 

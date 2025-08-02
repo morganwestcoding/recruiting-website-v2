@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Building2, ChevronRight, ChevronLeft } from 'lucide-react'
+import { ArrowRight} from 'lucide-react'
 import { useState, useEffect } from 'react'
 
 export default function HomePage() {
@@ -93,7 +93,7 @@ export default function HomePage() {
       name: "James Wilson",
       title: "Senior Developer",
       company: "DevStudio Pro",
-      review: "From a candidate's perspective, the interview experience was smooth and professional. Now as a hiring manager, I see why companies choose SagePaths.",
+      review: "From a candidate&apos;s perspective, the interview experience was smooth and professional. Now as a hiring manager, I see why companies choose SagePaths.",
       initials: "JW",
       color: "bg-teal-500"
     }
@@ -173,7 +173,7 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg text-gray-700 mb-10 leading-relaxed max-w-xl">
-                Let's build your dream team, one standout candidate at a time!
+                Let&apos;s build your dream team, one standout candidate at a time!
               </p>
 
               <div className="w-full max-w-md">

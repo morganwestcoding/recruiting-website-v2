@@ -123,7 +123,7 @@ export default function ContactPage() {
               What to Expect
             </h2>
             <p className="text-xl text-gray-600">
-              Here's what happens when you reach out
+              Here&apos;s what happens when you reach out
             </p>
           </div>
 

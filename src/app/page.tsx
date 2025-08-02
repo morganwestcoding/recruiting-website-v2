@@ -223,7 +223,7 @@ export default function HomePage() {
       </section>
 
       {/* Complete Hiring Solution Section */}
-<section className="py-20  bg-[#f8fffe]">
+<section className="py-20  bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
@@ -262,7 +262,7 @@ export default function HomePage() {
                 description: "Personal point of contact ensuring consistent communication and quality service"
               }
             ].map((solution, index) => (
-              <div key={index} className="group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-[#00685E] transition-all duration-200">
+              <div key={index} className="group bg-[#f8fffe] border border-gray-200 rounded-2xl p-6 hover:shadow-lg hover:border-[#00685E] transition-all duration-200">
                 {/* Light green background with darker green checkmark */}
                 <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" color="#00685E" fill="none">

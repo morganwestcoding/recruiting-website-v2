@@ -35,7 +35,7 @@ export default function AboutPage() {
 
       {/* Main Content - Modern Card Layout */}
       <section className="bg-[#f8fffe] py-12 lg:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ">
           
           {/* Header */}
           <div className="text-center mb-16">
@@ -50,7 +50,10 @@ export default function AboutPage() {
 Where smart recruiting meets human connection
           </p>
           </div>
-
+          </div>
+           </section>
+      <section className="py-16 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-8">
             
             {/* Left Card - Photo */}
@@ -125,7 +128,9 @@ Where smart recruiting meets human connection
             </div>
           </div>
         </div>
+  
       </section>
+     
 
       {/* Experience Section */}
       <section className="py-12 bg-white">

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Mail, Phone, Linkedin, Globe, Search, Users, Target, DollarSign, Zap } from 'lucide-react'
+import { Mail, Phone, Search, Users, Target, DollarSign, Zap } from 'lucide-react'
 
 export default function ServicesPage() {
   return (
@@ -88,7 +88,7 @@ export default function ServicesPage() {
                   Full-Cycle Recruitment
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  We manage the entire hiring process — from job description to offer acceptance. What sets us apart is how we find top talent: some of the best hires we've placed weren't even actively looking.
+                  We manage the entire hiring process — from job description to offer acceptance. What sets us apart is how we find top talent: some of the best hires we&apos;ve placed weren&apos;t even actively looking.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   Through long-standing relationships and a trusted network, we connect exceptional candidates with roles that align with their goals — and yours.
@@ -106,10 +106,10 @@ export default function ServicesPage() {
                   Specialized Hiring
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  We've recruited in legal, accounting, technology, finance, construction, manufacturing, and more. We understand the nuances of each role and industry.
+                  We&apos;ve recruited in legal, accounting, technology, finance, construction, manufacturing, and more. We understand the nuances of each role and industry.
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
-                  From C-level to entry level, we've done roles above and in between.
+                  From C-level to entry level, we&apos;ve done roles above and in between.
                 </p>
               </div>
               <div className="order-1 lg:order-2">
@@ -147,7 +147,7 @@ export default function ServicesPage() {
                   AI-Enhanced Efficiency
                 </h2>
                 <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                  Ever wanted to implement AI with your business process but didn't know how?
+                  Ever wanted to implement AI with your business process but didn&apos;t know how?
                 </p>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   SagePaths blends human intuition and connections with AI automation tools to streamline your hiring process and surface top talent faster than ever.
@@ -205,7 +205,7 @@ export default function ServicesPage() {
             Ready to Start Hiring?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Let's discuss your hiring needs and how we can help you find the perfect candidates.
+            Let&apos;s discuss your hiring needs and how we can help you find the perfect candidates.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 

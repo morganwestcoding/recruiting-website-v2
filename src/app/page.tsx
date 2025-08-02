@@ -318,7 +318,7 @@ export default function HomePage() {
                   } : {}}
                 >
                   {/* Large Quote Mark */}
-                  <div className="text-6xl text-[#00685E] font-serif leading-none mb-4 opacity-20">"</div>
+                  <div className="text-6xl text-[#00685E] font-serif leading-none mb-4 opacity-20">&quot;</div>
                   
                   {/* Review Text */}
                   <p className="text-gray-700 mb-8 leading-relaxed text-lg italic">
